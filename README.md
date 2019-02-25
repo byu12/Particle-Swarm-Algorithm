@@ -1,1 +1,2 @@
 # Particle-Swarm-Algorithm
+The particle swarm optimization (PSO) algorithm, developed in 1995 by Kennedy and Eberhart, is based on the social behavior exhibited by animals such as birds or fish when they are working as a group to reach a destination.  The algorithm can be used to find the global maximum or minimum of all sorts of functions.  This project will create a PSO implementation to solve the Ackley Function, derive a list of key parameters, and execute the program with modulated parameters making note of the results for further analysis.
