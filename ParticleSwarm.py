@@ -9,6 +9,7 @@ class Particle:
     # initialize properties of particle including current position,
     # global best, local best and velocity
     def __init__(self):
+        # default constructor
         # initialize random positive and negative numbers of x and y in range (-15,15)
         self.position = numpy.array([(-1) ** (bool(random.getrandbits(1))) * random.random() * 15,
                                   (-1) ** (bool(random.getrandbits(1))) * random.random() * 15])
@@ -25,16 +26,16 @@ class Particle:
 
 
 class PSO:
-    # initialize
+    # parameterized constructor
     def __init__(self, target, num_of_particles):
-        # initialize
         self.target = target
         self.num_of_particles = num_of_particles
         self.particles = []
         self.gbest_value = float('inf')
         self.gbest_position = numpy.array([random.random() * 15, random.random() * 15])
 
-    # The formula of ackley function from wikipedia
+    # The formula of Ackley function from wikipedia
+    # this is Ackley function in its 2 dimensional domain
     def ackley(self, particle):
         x = particle.position[0]
         y = particle.position[1]
