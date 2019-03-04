@@ -2,17 +2,7 @@ import random
 import numpy
 import math
 
-# provide value of inertia w, acceleration coefficient c1 and c2
-# those values can be changed
-# note that
-W = 0.5
-c1 = 0.8
-c2 = 0.9
 twopi = 2 * math.pi
-
-# user to enter number of iterations and particles
-num_of_iterations = int(input("What is the number of iterations? "))
-num_of_particles = int(input("What is the number of particles? "))
 
 
 class Particle:
@@ -78,10 +68,10 @@ class PSO:
     # update the position of the next particle
     def search_iteration(self):
         for particle in self.particles:
-            global W
-            new_velocity = (W * particle.velocity) + (c1 * random.random()) * (
+            global value_of_w
+            new_velocity = (value_of_w * particle.velocity) + (value_of_c1 * random.random()) * (
                         particle.pbest_p - particle.position) + \
-                           (random.random() * c2) * (self.gbest_position - particle.position)
+                           (random.random() * value_of_c2) * (self.gbest_position - particle.position)
             particle.velocity = new_velocity
             particle.update_postition()
 
@@ -92,6 +82,14 @@ class PSO:
 
 # main function to execute iterations
 if __name__ == "__main__":
+
+    # user to enter number of iterations, particles, inertia weight w, acceleration coefficient c1 and c2
+    num_of_iterations = int(input("What is the number of iterations? "))
+    num_of_particles = int(input("What is the number of particles? "))
+    value_of_w = float(input("What is the value of inertia weight? "))
+    value_of_c1 = float(input("What is the value of personal acceleration coefficient? "))
+    value_of_c2 = float(input("What is the value of social acceleration coefficient? "))
+
     search_in_pso = PSO(0, num_of_particles)
     particles_vector = [Particle() for _ in range(search_in_pso.num_of_particles)]
     search_in_pso.particles = particles_vector
