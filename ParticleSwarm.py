@@ -83,23 +83,27 @@ class PSO:
 # main function to execute iterations
 if __name__ == "__main__":
 
-    # user to enter number of iterations, particles, inertia weight w, acceleration coefficient c1 and c2
-    num_of_iterations = int(input("What is the number of iterations? "))
-    num_of_particles = int(input("What is the number of particles? "))
-    value_of_w = float(input("What is the value of inertia weight? "))
-    value_of_c1 = float(input("What is the value of personal acceleration coefficient? "))
-    value_of_c2 = float(input("What is the value of social acceleration coefficient? "))
+    try:
+        # user to enter number of iterations, particles, inertia weight w, acceleration coefficient c1 and c2
+        num_of_iterations = int(input("What is the number of iterations? "))
+        num_of_particles = int(input("What is the number of particles? "))
+        value_of_w = float(input("What is the value of inertia weight? "))
+        value_of_c1 = float(input("What is the value of personal acceleration coefficient? "))
+        value_of_c2 = float(input("What is the value of social acceleration coefficient? "))
 
-    search_in_pso = PSO(0, num_of_particles)
-    particles_vector = [Particle() for _ in range(search_in_pso.num_of_particles)]
-    search_in_pso.particles = particles_vector
-    search_in_pso.print_particles()
+        search_in_pso = PSO(0, num_of_particles)
+        particles_vector = [Particle() for _ in range(search_in_pso.num_of_particles)]
+        search_in_pso.particles = particles_vector
+        search_in_pso.print_particles()
 
-    i = 0
-    while i < num_of_iterations:
-        search_in_pso.set_pbest()
-        search_in_pso.set_gbest()
-        search_in_pso.search_iteration()
-        i += 1
+        i = 0
+        while i < num_of_iterations:
+            search_in_pso.set_pbest()
+            search_in_pso.set_gbest()
+            search_in_pso.search_iteration()
+            i += 1
 
-    print("The global best solution is: %s, this is achieved at iteration %s" % (search_in_pso.gbest_position, i))
+        print("The global best solution is: %s, this is achieved at iteration %s" % (search_in_pso.gbest_position, i))
+
+    except ValueError as e:
+        print("Please provide a correct format of input! " + str(e))
