@@ -4,4 +4,4 @@ The particle swarm optimization (PSO) algorithm, developed in 1995 by Kennedy an
 Make sure to change the directory in call_pso.sh to your local directory before running the program.
 Run this in an environment that supports the execution of shellscript in command line such as Git Bash.
 Command to run the program:
-sh call_pso.sh <num_iteration> <num_particle> <value_of_w> <value_of_c1> <value_of_c2>
+\nsh call_pso.sh <num_iteration> <num_particle> <value_of_w> <value_of_c1> <value_of_c2>
