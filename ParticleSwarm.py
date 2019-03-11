@@ -1,6 +1,7 @@
 import random
 import numpy
 import math
+import argparse
 
 twopi = 2 * math.pi
 
@@ -16,9 +17,6 @@ class Particle:
         self.pbest_p = self.position
         self.pbest_v = float('inf')
         self.velocity = numpy.array([0, 0])
-
-    def __str__(self):
-        print("The position of the particle is %s, the local best position is %s" % (self.position, self.pbest_p))
 
     # the next position of the particle is current position + its velocity
     def update_postition(self):
@@ -40,7 +38,7 @@ class PSO:
         x = particle.position[0]
         y = particle.position[1]
         p1 = (-20) * math.exp((-0.2) * math.sqrt(0.5*((x*x)+(y*y))))
-        p2 = math.exp(0.5*(math.cos(twopi * x)+ math.cos(twopi * y)))
+        p2 = math.exp(0.5*(math.cos(twopi * x) + math.cos(twopi * y)))
         result = p1 - p2 + math.e + 20
         return result
 
@@ -76,35 +74,42 @@ class PSO:
             particle.velocity = new_velocity
             particle.update_postition()
 
-    def print_particles(self):
-        for particle in self.particles:
-            particle.__str__()
-
 
 # main function to execute iterations
 if __name__ == "__main__":
 
-    try:
-        # user to enter number of iterations, particles, inertia weight w, acceleration coefficient c1 and c2
-        num_of_iterations = int(input("What is the number of iterations? "))
-        num_of_particles = int(input("What is the number of particles? "))
-        value_of_w = float(input("What is the value of inertia weight? "))
-        value_of_c1 = float(input("What is the value of personal acceleration coefficient? "))
-        value_of_c2 = float(input("What is the value of social acceleration coefficient? "))
+    # user to enter number of iterations, particles, inertia weight w, acceleration coefficient c1 and c2
+    # when there are 5 arguments, proceed
+    # number of iterations, number of particles, inertia weight,
+    # personal and social acceleration coefficient are the input arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("num_iteration", type=int, help="display number of iteration")
+    parser.add_argument("num_particle", type=int, help="display number of particles")
+    parser.add_argument("w", type=float, help="display value of w")
+    parser.add_argument("c1", type=float, help="display value of c1")
+    parser.add_argument("c2", type=float, help="display value of c2")
 
-        search_in_pso = PSO(0, num_of_particles)
-        particles_vector = [Particle() for _ in range(search_in_pso.num_of_particles)]
-        search_in_pso.particles = particles_vector
-        search_in_pso.print_particles()
+    args = parser.parse_args()
 
-        i = 0
-        while i < num_of_iterations:
-            search_in_pso.set_pbest()
-            search_in_pso.set_gbest()
-            search_in_pso.search_iteration()
-            i += 1
+    num_of_iterations = args.num_iteration
+    num_of_particles = args.num_particle
+    value_of_w = args.w
+    value_of_c1 = args.c1
+    value_of_c2 = args.c2
 
-        print("The global best solution is: %s, this is achieved at iteration %s" % (search_in_pso.gbest_position, i))
+    search_in_pso = PSO(0, num_of_particles)
+    particles_vector = [Particle() for _ in range(search_in_pso.num_of_particles)]
+    search_in_pso.particles = particles_vector
 
-    except ValueError as e:
-        print("Please provide a correct format of input! " + str(e))
+    i = 0
+    while i < num_of_iterations:
+        search_in_pso.set_pbest()
+        search_in_pso.set_gbest()
+        search_in_pso.search_iteration()
+        i += 1
+
+    print("The user entered %d as number of iterations, %d as number of particles, %f as inertia weight, "
+          "%f as personal acceleration coefficient and %f as social acceleration coefficient" % (num_of_iterations,num_of_particles,value_of_w,value_of_c1,value_of_c2))
+    print("The global best solution is: %s, this is achieved at iteration %s" % (search_in_pso.gbest_position, i))
+
+
