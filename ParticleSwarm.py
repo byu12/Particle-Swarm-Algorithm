@@ -78,38 +78,54 @@ class PSO:
 # main function to execute iterations
 if __name__ == "__main__":
 
-    # user to enter number of iterations, particles, inertia weight w, acceleration coefficient c1 and c2
-    # when there are 5 arguments, proceed
-    # number of iterations, number of particles, inertia weight,
-    # personal and social acceleration coefficient are the input arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument("num_iteration", type=int, help="display number of iteration")
-    parser.add_argument("num_particle", type=int, help="display number of particles")
-    parser.add_argument("w", type=float, help="display value of w")
-    parser.add_argument("c1", type=float, help="display value of c1")
-    parser.add_argument("c2", type=float, help="display value of c2")
+    try:
+        # user to enter number of iterations, particles, inertia weight w, acceleration coefficient c1 and c2
+        # when there are 5 arguments, proceed
+        # number of iterations, number of particles, inertia weight,
+        # personal and social acceleration coefficient are the input arguments
+        parser = argparse.ArgumentParser()
+        parser.add_argument("num_iteration", type=int, help="display number of iteration")
+        parser.add_argument("num_particle", type=int, help="display number of particles")
+        parser.add_argument("w", type=float, help="display value of w")
+        parser.add_argument("c1", type=float, help="display value of c1")
+        parser.add_argument("c2", type=float, help="display value of c2")
 
-    args = parser.parse_args()
+        args = parser.parse_args()
 
-    num_of_iterations = args.num_iteration
-    num_of_particles = args.num_particle
-    value_of_w = args.w
-    value_of_c1 = args.c1
-    value_of_c2 = args.c2
+        num_of_iterations = args.num_iteration
+        num_of_particles = args.num_particle
+        value_of_w = args.w
+        value_of_c1 = args.c1
+        value_of_c2 = args.c2
 
-    search_in_pso = PSO(0, num_of_particles)
-    particles_vector = [Particle() for _ in range(search_in_pso.num_of_particles)]
-    search_in_pso.particles = particles_vector
+        if num_of_iterations <= 0 or num_of_particles <= 0:
+            raise Exception("Input parameters has to be positive!")
 
-    i = 0
-    while i < num_of_iterations:
-        search_in_pso.set_pbest()
-        search_in_pso.set_gbest()
-        search_in_pso.search_iteration()
-        i += 1
+        if value_of_w > 1 or value_of_w < -1:
+            raise Exception("Inertia coefficient has to be in [-1,1]")
 
-    print("The user entered %d as number of iterations, %d as number of particles, %f as inertia weight, "
-          "%f as personal acceleration coefficient and %f as social acceleration coefficient" % (num_of_iterations,num_of_particles,value_of_w,value_of_c1,value_of_c2))
-    print("The global best solution is: %s, this is achieved at iteration %s" % (search_in_pso.gbest_position, i))
+        c1_c2 = [value_of_c1, value_of_c2]
+        sum_of_c1_c2 = sum(c1_c2)
+        if sum_of_c1_c2 > 4.4 or sum_of_c1_c2 < 0.1:
+            raise Exception("The sum of cognitive and social coefficient has to be in [0.1,4.4]")
+
+        search_in_pso = PSO(0, num_of_particles)
+        particles_vector = [Particle() for _ in range(search_in_pso.num_of_particles)]
+        search_in_pso.particles = particles_vector
+
+        i = 0
+        while i < num_of_iterations:
+            search_in_pso.set_pbest()
+            search_in_pso.set_gbest()
+            search_in_pso.search_iteration()
+            i += 1
+
+        print("The user entered %d as number of iterations, %d as number of particles, %f as inertia weight, "
+              "%f as personal acceleration coefficient and %f as social acceleration coefficient" % (num_of_iterations,num_of_particles,value_of_w,value_of_c1,value_of_c2))
+        print("The global best solution is: %s, this is achieved at iteration %s" % (search_in_pso.gbest_position, i))
+
+    except Exception as e:
+        print("Invalid input parameters. " + str(e))
+
 
 
