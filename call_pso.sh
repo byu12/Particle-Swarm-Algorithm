@@ -5,5 +5,5 @@ pythonFile="/ParticleSwarm.py"
 dirPath="$(pwd)"
 filePath=$dirPath$pythonFile
 
-/c/Users/yubo/AppData/Local/Programs/Python/Python36-32/Python.exe "$filePath" "$1" "$2" "$3" "$4" "$5"
+/c/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/Shared/Python36_64/Python.exe "$filePath" "$1" "$2" "$3" "$4" "$5" "$6"
 
