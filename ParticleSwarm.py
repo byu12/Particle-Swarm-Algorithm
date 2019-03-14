@@ -5,6 +5,7 @@ import sys
 
 
 def parse_arguments(arg):
+
     # user to enter number of iterations, particles, inertia weight w, acceleration coefficient c1 and c2
     # when there are 5 arguments, proceed
     # number of iterations, number of particles, inertia weight,
@@ -18,6 +19,7 @@ def parse_arguments(arg):
     parser.add_argument("error", type=float, help="value of target error")
 
     arguments = parser.parse_args(arg)
+
     return arguments
 
 
