@@ -1,39 +1,67 @@
 import random
 import numpy as np
 import argparse
+import sys
 
 
-def check_parameters_execute_pso():
+def parse_arguments(arg):
+    # user to enter number of iterations, particles, inertia weight w, acceleration coefficient c1 and c2
+    # when there are 5 arguments, proceed
+    # number of iterations, number of particles, inertia weight,
+    # personal and social acceleration coefficient are the input arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("num_iteration", type=int, help="number of iteration")
+    parser.add_argument("num_particle", type=int, help="number of particles")
+    parser.add_argument("w", type=float, help="value of w")
+    parser.add_argument("c1", type=float, help="value of c1")
+    parser.add_argument("c2", type=float, help="value of c2")
+    parser.add_argument("error", type=float, help="value of target error")
+
+    arguments = parser.parse_args(arg)
+    return arguments
+
+
+def check_parameters_execute_pso(flag):
     try:
-
+        message = "Invalid input parameters. "
+        # number of iterations and particles can not be negative
         if num_of_iterations <= 0 or num_of_particles <= 0:
             raise Exception("Input parameters has to be positive!")
 
+        # value of inertia weight is in [-1,1]
         if value_of_w > 1 or value_of_w < -1:
             raise Exception("Inertia coefficient has to be in [-1,1]")
 
+        # the sum of cognitive and social coefficient is in [0.1,4.4]
         c1_c2 = [value_of_c1, value_of_c2]
         sum_of_c1_c2 = sum(c1_c2)
         if sum_of_c1_c2 > 4.4 or sum_of_c1_c2 < 0.1:
             raise Exception("The sum of cognitive and social coefficient has to be in [0.1,4.4]")
 
-        execute_pso()
+        if flag:
+            execute_pso()
 
     except Exception as e:
-        print("Invalid input parameters. " + str(e))
+        message = message + str(e)
+        print(message)
+
+    return message
 
 
 def execute_pso():
-
+    # create particle vector based on number of particles
     search_in_pso = PSO(0, target_error, num_of_particles)
     particles_vector = [Particle() for _ in range(search_in_pso.num_of_particles)]
     search_in_pso.particles = particles_vector
 
     i = 0
+    # set local and global best position
+    # for each iteration, update velocity and position
     while i < num_of_iterations:
         search_in_pso.set_pbest()
         search_in_pso.set_gbest()
 
+        # if global best value is within target error criteria, exit
         if abs(search_in_pso.gbest_value - search_in_pso.target) <= search_in_pso.target_error:
             break
 
@@ -67,12 +95,12 @@ class Particle:
 
 
 class PSO:
-    # parameterized constructor
 
-    def __init__(self, target, target_error, num_of_particles):
+    # parameterized constructor
+    def __init__(self, target, target_err, number_of_particles):
         self.target = target
-        self.target_error = target_error
-        self.num_of_particles = num_of_particles
+        self.target_error = target_err
+        self.num_of_particles = number_of_particles
         self.particles = []
         self.gbest_value = float('inf')
         self.gbest_position = np.array([random.random() * 15, random.random() * 15])
@@ -119,20 +147,8 @@ class PSO:
 
 # main function to execute iterations
 if __name__ == "__main__":
-    # user to enter number of iterations, particles, inertia weight w, acceleration coefficient c1 and c2
-    # when there are 5 arguments, proceed
-    # number of iterations, number of particles, inertia weight,
-    # personal and social acceleration coefficient are the input arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument("num_iteration", type=int, help="number of iteration")
-    parser.add_argument("num_particle", type=int, help="number of particles")
-    parser.add_argument("w", type=float, help="value of w")
-    parser.add_argument("c1", type=float, help="value of c1")
-    parser.add_argument("c2", type=float, help="value of c2")
-    parser.add_argument("error", type=float, help="value of target error")
 
-    args = parser.parse_args()
-
+    args = parse_arguments(sys.argv[1:])
     num_of_iterations = args.num_iteration
     num_of_particles = args.num_particle
     value_of_w = args.w
@@ -140,7 +156,9 @@ if __name__ == "__main__":
     value_of_c2 = args.c2
     target_error = args.error
 
-    check_parameters_execute_pso()
+    # flag is used for unit tests
+    execute = True
+    check_parameters_execute_pso(execute)
 
 
 

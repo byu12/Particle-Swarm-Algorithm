@@ -1,7 +1,6 @@
 import unittest
 import random
 import numpy
-import math
 import argparse
 from scipy.optimize import differential_evolution
 import ParticleSwarm as psClass
@@ -36,9 +35,9 @@ class ParticleSwarmTest(unittest.TestCase):
         print("In Ackley function is f(0,0)=0")
         print("end of test_ackley_minimum.\n")
 
-    def test_pso(self):
+    def test_pso_parameterOptionOne(self):
 
-        print("start of test_pso.\n")
+        print("start of test_pso_parameterOptionOne.\n")
         psClass.target_error = 0.01
         psClass.num_of_particles = 100
         psClass.num_of_iterations = 100
@@ -51,7 +50,41 @@ class ParticleSwarmTest(unittest.TestCase):
         self.assertGreater(0.1, abs(arr[0]))
         self.assertGreater(0.1, abs(arr[1]))
 
-        print("end of test_pso.\n")
+        print("end of test_pso_parameterOptionOne.\n")
+
+    def test_pso_parameterOptionTwo(self):
+
+        print("start of test_pso_parameterOptionTwo.\n")
+        psClass.target_error = 0.0001
+        psClass.num_of_particles = 100
+        psClass.num_of_iterations = 100
+        psClass.value_of_w = 0.3
+        psClass.value_of_c1 = 0.2
+        psClass.value_of_c2 = 0.5
+
+        arr = psClass.execute_pso()
+
+        self.assertGreater(0.1, abs(arr[0]))
+        self.assertGreater(0.1, abs(arr[1]))
+
+        print("end of test_pso_parameterOptionTwo.\n")
+
+    def test_pso_parameterOptionThree(self):
+
+        print("start of test_pso_parameterOptionThree.\n")
+        psClass.target_error = 0.0001
+        psClass.num_of_particles = 50
+        psClass.num_of_iterations = 50
+        psClass.value_of_w = 0.3
+        psClass.value_of_c1 = 0.2
+        psClass.value_of_c2 = 0.5
+
+        arr = psClass.execute_pso()
+
+        self.assertGreater(0.1, abs(arr[0]))
+        self.assertGreater(0.1, abs(arr[1]))
+
+        print("end of test_pso_parameterOptionThree.\n")
 
 
 if __name__ == '__main__':
