@@ -41,7 +41,7 @@ class ParticleSwarmTest(unittest.TestCase):
         psClass.value_of_c1 = 0.2
         psClass.value_of_c2 = 0.3
 
-        arr = psClass.execute_pso()
+        arr = psClass.execute_pso(False)
 
         self.assertGreater(0.1, abs(arr[5]))
         self.assertGreater(0.1, abs(arr[6]))
@@ -58,7 +58,7 @@ class ParticleSwarmTest(unittest.TestCase):
         psClass.value_of_c1 = 0.2
         psClass.value_of_c2 = 0.5
 
-        arr = psClass.execute_pso()
+        arr = psClass.execute_pso(False)
 
         self.assertGreater(0.1, abs(arr[5]))
         self.assertGreater(0.1, abs(arr[6]))
@@ -75,7 +75,7 @@ class ParticleSwarmTest(unittest.TestCase):
         psClass.value_of_c1 = 0.2
         psClass.value_of_c2 = 0.5
 
-        arr = psClass.execute_pso()
+        arr = psClass.execute_pso(False)
 
         self.assertGreater(0.1, abs(arr[5]))
         self.assertGreater(0.1, abs(arr[6]))

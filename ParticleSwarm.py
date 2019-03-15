@@ -41,7 +41,7 @@ def check_parameters_execute_pso(flag):
             raise Exception("The sum of cognitive and social coefficient has to be in [0.1,4.4]")
 
         if flag:
-            execute_pso()
+            execute_pso(True)
 
     except Exception as e:
         message = message + str(e)
@@ -50,7 +50,7 @@ def check_parameters_execute_pso(flag):
     return message
 
 
-def execute_pso():
+def execute_pso(flag):
     # create particle vector based on number of particles
     target_error = 0.0001
     search_in_pso = PSO(0, target_error, num_of_particles)
@@ -84,18 +84,21 @@ def execute_pso():
     output.append(search_in_pso.gbest_position[1])
     output.append(search_in_pso.gbest_value)
 
-    read_to_csv(output)
+    # control on unit tests
+    if flag:
+        read_to_csv(output)
 
     return output
 
 
+# generate csv file for program output
 def read_to_csv(output):
-
+    # append result each time program is ran
     with open('pso_output.csv', 'a', newline='') as csvFile:
 
         csvwriter = csv.writer(csvFile, delimiter=',',
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        csvwriter.writerow([output[0], output[1],  output[2],  output[3], output[4],  output[5], output[6],  output[7]])
+        csvwriter.writerow(output)
 
         csvFile.close()
 
