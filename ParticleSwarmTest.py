@@ -1,8 +1,4 @@
 import unittest
-import random
-import numpy
-import argparse
-from scipy.optimize import differential_evolution
 import ParticleSwarm as psClass
 
 
@@ -47,8 +43,8 @@ class ParticleSwarmTest(unittest.TestCase):
 
         arr = psClass.execute_pso()
 
-        self.assertGreater(0.1, abs(arr[0]))
-        self.assertGreater(0.1, abs(arr[1]))
+        self.assertGreater(0.1, abs(arr[5]))
+        self.assertGreater(0.1, abs(arr[6]))
 
         print("end of test_pso_parameterOptionOne.\n")
 
@@ -64,8 +60,8 @@ class ParticleSwarmTest(unittest.TestCase):
 
         arr = psClass.execute_pso()
 
-        self.assertGreater(0.1, abs(arr[0]))
-        self.assertGreater(0.1, abs(arr[1]))
+        self.assertGreater(0.1, abs(arr[5]))
+        self.assertGreater(0.1, abs(arr[6]))
 
         print("end of test_pso_parameterOptionTwo.\n")
 
@@ -81,8 +77,8 @@ class ParticleSwarmTest(unittest.TestCase):
 
         arr = psClass.execute_pso()
 
-        self.assertGreater(0.1, abs(arr[0]))
-        self.assertGreater(0.1, abs(arr[1]))
+        self.assertGreater(0.1, abs(arr[5]))
+        self.assertGreater(0.1, abs(arr[6]))
 
         print("end of test_pso_parameterOptionThree.\n")
 

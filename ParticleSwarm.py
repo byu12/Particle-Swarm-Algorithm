@@ -2,6 +2,7 @@ import random
 import numpy as np
 import argparse
 import sys
+import csv
 
 
 def parse_arguments(arg):
@@ -55,6 +56,7 @@ def execute_pso():
     search_in_pso = PSO(0, target_error, num_of_particles)
     particles_vector = [Particle() for _ in range(search_in_pso.num_of_particles)]
     search_in_pso.particles = particles_vector
+    output = []
 
     i = 0
     # set local and global best position
@@ -73,7 +75,29 @@ def execute_pso():
     print(num_of_iterations, num_of_particles, value_of_c2, value_of_c1, value_of_w, search_in_pso.gbest_position[0],
           search_in_pso.gbest_position[1], search_in_pso.gbest_value)
 
-    return search_in_pso.gbest_position
+    output.append(num_of_iterations)
+    output.append(num_of_particles)
+    output.append(value_of_c2)
+    output.append(value_of_c1)
+    output.append(value_of_w)
+    output.append(search_in_pso.gbest_position[0])
+    output.append(search_in_pso.gbest_position[1])
+    output.append(search_in_pso.gbest_value)
+
+    read_to_csv(output)
+
+    return output
+
+
+def read_to_csv(output):
+
+    with open('pso_output.csv', 'a', newline='') as csvFile:
+
+        csvwriter = csv.writer(csvFile, delimiter=',',
+                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        csvwriter.writerow([output[0], output[1],  output[2],  output[3], output[4],  output[5], output[6],  output[7]])
+
+        csvFile.close()
 
 
 class Particle:
