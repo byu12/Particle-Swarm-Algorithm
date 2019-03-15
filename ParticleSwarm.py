@@ -16,7 +16,6 @@ def parse_arguments(arg):
     parser.add_argument("w", type=float, help="value of w")
     parser.add_argument("c1", type=float, help="value of c1")
     parser.add_argument("c2", type=float, help="value of c2")
-    parser.add_argument("error", type=float, help="value of target error")
 
     arguments = parser.parse_args(arg)
 
@@ -52,6 +51,7 @@ def check_parameters_execute_pso(flag):
 
 def execute_pso():
     # create particle vector based on number of particles
+    target_error = 0.0001
     search_in_pso = PSO(0, target_error, num_of_particles)
     particles_vector = [Particle() for _ in range(search_in_pso.num_of_particles)]
     search_in_pso.particles = particles_vector
@@ -70,10 +70,8 @@ def execute_pso():
         search_in_pso.search_iteration()
         i += 1
 
-    print("The user entered %d as number of iterations, %d as number of particles, %f as inertia weight, "
-          "%f as personal acceleration coefficient and %f as social acceleration coefficient" % (
-          num_of_iterations, num_of_particles, value_of_w, value_of_c1, value_of_c2))
-    print("The global best solution is: %s, this is achieved at iteration %s" % (search_in_pso.gbest_position, i))
+    print(num_of_iterations, num_of_particles, value_of_c2, value_of_c1, value_of_w, search_in_pso.gbest_position[0],
+          search_in_pso.gbest_position[1], search_in_pso.gbest_value)
 
     return search_in_pso.gbest_position
 
@@ -156,7 +154,6 @@ if __name__ == "__main__":
     value_of_w = args.w
     value_of_c1 = args.c1
     value_of_c2 = args.c2
-    target_error = args.error
 
     # flag is used for unit tests
     execute = True
