@@ -27,8 +27,12 @@ def check_parameters_execute_pso(flag):
     try:
         message = "Invalid input parameters. "
         # number of iterations and particles can not be negative
-        if num_of_iterations <= 0 or num_of_particles <= 0:
+        if num_of_iterations <= 0:
             raise Exception("Input parameter number of iteration has to be positive!")
+
+        # number of particles can not be negative
+        if num_of_particles <= 0:
+            raise Exception("Input parameter number of particles has to be positive!")
 
         # value of inertia weight is in (-1,1)
         if value_of_w >= 1 or value_of_w <= -1:
