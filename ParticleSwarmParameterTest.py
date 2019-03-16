@@ -52,6 +52,24 @@ class ParticleSwarmTest(unittest.TestCase):
         return_message = psClass.check_parameters_execute_pso(False)
         self.assertTrue('Invalid'.lower() in return_message.lower())
 
+    def test_invalid_value_c1(self):
+        psClass.num_of_iterations = 10
+        psClass.num_of_particles = 10
+        psClass.value_of_w = 0.3
+        psClass.value_of_c1 = 0
+        psClass.value_of_c2 = 0.5
+        return_message = psClass.check_parameters_execute_pso(False)
+        self.assertTrue('Invalid'.lower() in return_message.lower())
+
+    def test_invalid_value_c2(self):
+        psClass.num_of_iterations = 10
+        psClass.num_of_particles = 10
+        psClass.value_of_w = 0.3
+        psClass.value_of_c1 = 0.3
+        psClass.value_of_c2 = 0
+        return_message = psClass.check_parameters_execute_pso(False)
+        self.assertTrue('Invalid'.lower() in return_message.lower())
+
 
 if __name__ == '__main__':
     unittest.main()

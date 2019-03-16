@@ -28,17 +28,25 @@ def check_parameters_execute_pso(flag):
         message = "Invalid input parameters. "
         # number of iterations and particles can not be negative
         if num_of_iterations <= 0 or num_of_particles <= 0:
-            raise Exception("Input parameters has to be positive!")
+            raise Exception("Input parameter number of iteration has to be positive!")
 
-        # value of inertia weight is in [-1,1]
-        if value_of_w > 1 or value_of_w < -1:
-            raise Exception("Inertia coefficient has to be in [-1,1]")
+        # value of inertia weight is in (-1,1)
+        if value_of_w >= 1 or value_of_w <= -1:
+            raise Exception("Inertia coefficient has to be in (-1,1)")
 
-        # the sum of cognitive and social coefficient is in [0.1,4.4]
+        # cognitive coefficient is float in (0,3)
+        if value_of_c1 <= 0 or value_of_c1 >= 3:
+            raise Exception("Cognitive coefficient has to be in (0,3)")
+
+        # social coefficient is float in (0,3)
+        if value_of_c2 <= 0 or value_of_c2 >= 3:
+            raise Exception("Social coefficient has to be in (0,3)")
+
+        # the sum of cognitive and social coefficient is in (0.1,4.4)
         c1_c2 = [value_of_c1, value_of_c2]
         sum_of_c1_c2 = sum(c1_c2)
-        if sum_of_c1_c2 > 4.4 or sum_of_c1_c2 < 0.1:
-            raise Exception("The sum of cognitive and social coefficient has to be in [0.1,4.4]")
+        if sum_of_c1_c2 >= 4.4 or sum_of_c1_c2 <= 0.1:
+            raise Exception("The sum of cognitive and social coefficient has to be in (0.1,4.4)")
 
         if flag:
             execute_pso(True)
