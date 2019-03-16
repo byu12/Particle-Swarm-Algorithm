@@ -60,8 +60,7 @@ def check_parameters_execute_pso(flag):
 
 def execute_pso(flag):
     # create particle vector based on number of particles
-    target_error = 0.00001
-    search_in_pso = PSO(0, target_error, num_of_particles)
+    search_in_pso = PSO(num_of_particles)
     particles_vector = [Particle() for _ in range(search_in_pso.num_of_particles)]
     search_in_pso.particles = particles_vector
     output = []
@@ -72,10 +71,6 @@ def execute_pso(flag):
     while i < num_of_iterations:
         search_in_pso.set_pbest()
         search_in_pso.set_gbest()
-
-        # if global best value is within target error criteria, exit
-        if abs(search_in_pso.gbest_value - search_in_pso.target) <= search_in_pso.target_error:
-            break
 
         search_in_pso.search_iteration()
         i += 1
@@ -132,9 +127,7 @@ class Particle:
 class PSO:
 
     # parameterized constructor
-    def __init__(self, target, target_err, number_of_particles):
-        self.target = target
-        self.target_error = target_err
+    def __init__(self, number_of_particles):
         self.num_of_particles = number_of_particles
         self.particles = []
         self.gbest_value = float('inf')
