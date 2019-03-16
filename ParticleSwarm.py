@@ -60,7 +60,7 @@ def check_parameters_execute_pso(flag):
 
 def execute_pso(flag):
     # create particle vector based on number of particles
-    target_error = 0.0001
+    target_error = 0.00001
     search_in_pso = PSO(0, target_error, num_of_particles)
     particles_vector = [Particle() for _ in range(search_in_pso.num_of_particles)]
     search_in_pso.particles = particles_vector
