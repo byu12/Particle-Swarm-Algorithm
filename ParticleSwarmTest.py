@@ -8,9 +8,8 @@ class ParticleSwarmTest(unittest.TestCase):
 
         print("start of test_ackley_positive.\n")
         num_of_particles = 50
-        target_error = 0.01
         result_arr = []
-        search_in_pso = psClass.PSO(0, target_error, num_of_particles)
+        search_in_pso = psClass.PSO(num_of_particles)
         particles_vector = [psClass.Particle() for _ in range(search_in_pso.num_of_particles)]
         search_in_pso.particles = particles_vector
 
@@ -34,7 +33,6 @@ class ParticleSwarmTest(unittest.TestCase):
     def test_pso_parameterOptionOne(self):
 
         print("start of test_pso_parameterOptionOne.\n")
-        psClass.target_error = 0.01
         psClass.num_of_particles = 100
         psClass.num_of_iterations = 100
         psClass.value_of_w = 0.1
@@ -51,7 +49,6 @@ class ParticleSwarmTest(unittest.TestCase):
     def test_pso_parameterOptionTwo(self):
 
         print("start of test_pso_parameterOptionTwo.\n")
-        psClass.target_error = 0.0001
         psClass.num_of_particles = 100
         psClass.num_of_iterations = 100
         psClass.value_of_w = 0.3
@@ -68,7 +65,6 @@ class ParticleSwarmTest(unittest.TestCase):
     def test_pso_parameterOptionThree(self):
 
         print("start of test_pso_parameterOptionThree.\n")
-        psClass.target_error = 0.0001
         psClass.num_of_particles = 50
         psClass.num_of_iterations = 50
         psClass.value_of_w = 0.3
