@@ -86,7 +86,7 @@ def change_c2():
     n = 0.1
     while n < 3.0:
         value_of_c2 = truncate(n, 4)
-        print("inertia weight is: %f" % value_of_c2)
+        print("social coefficient is: %f" % value_of_c2)
         subprocess.check_call([path, num_of_iterations, num_of_particles, value_of_w, value_of_c1, str(value_of_c2)])
         n = n + 0.14
 
