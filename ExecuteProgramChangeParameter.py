@@ -9,6 +9,8 @@ def truncate(n, decimals=0):
     return int(n * multiplier) / multiplier
 
 
+# change number of iterations
+# all other parameters are fixed
 def change_num_iterations():
     num_of_particles = "50"
     value_of_w = "0"
@@ -24,6 +26,8 @@ def change_num_iterations():
         n = i*5
 
 
+# change number of particles
+# all other parameters are fixed
 def change_num_particles():
     num_of_iterations = "50"
     value_of_w = "0"
@@ -40,6 +44,8 @@ def change_num_particles():
 
 
 # w is in [-1,1]
+# change value of inertia weight
+# all other parameters are fixed
 def change_inertia_weight():
     num_of_particles = "50"
     num_of_iterations = "50"
@@ -54,6 +60,8 @@ def change_inertia_weight():
 
 
 # c1 is in [0,3]
+# change cognitive coefficient
+# all other parameters are fixed
 def change_c1():
     num_of_particles = "50"
     num_of_iterations = "50"
@@ -68,6 +76,8 @@ def change_c1():
 
 
 # c2 is in [0,3]
+# change social coefficient
+# all other parameters are fixed
 def change_c2():
     num_of_particles = "50"
     num_of_iterations = "50"
@@ -87,7 +97,7 @@ if __name__ == "__main__":
     for x in range(5):
         change_num_iterations()
         change_num_particles()
-        change_inertia_weight()  # break at 0
+        change_inertia_weight()
         change_c1()
         change_c2()
 
