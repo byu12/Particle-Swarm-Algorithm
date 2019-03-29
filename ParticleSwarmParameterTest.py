@@ -1,5 +1,6 @@
 import unittest
 import ParticleSwarm as psClass
+from cookiecutter.main import cookiecutter
 
 
 class ParticleSwarmTest(unittest.TestCase):
@@ -43,7 +44,7 @@ class ParticleSwarmTest(unittest.TestCase):
         return_message = psClass.check_parameters_execute_pso(False)
         self.assertTrue('Invalid'.lower() in return_message.lower())
 
-    def test_invalid_value_of_c1c2(self):
+    def test_invalid_value_of_upper_c1c2(self):
         psClass.num_of_iterations = 10
         psClass.num_of_particles = 10
         psClass.value_of_w = 0.3
@@ -52,21 +53,48 @@ class ParticleSwarmTest(unittest.TestCase):
         return_message = psClass.check_parameters_execute_pso(False)
         self.assertTrue('Invalid'.lower() in return_message.lower())
 
-    def test_invalid_value_c1(self):
+    def test_invalid_value_of_lower_c1c2(self):
         psClass.num_of_iterations = 10
         psClass.num_of_particles = 10
         psClass.value_of_w = 0.3
-        psClass.value_of_c1 = 0
+        psClass.value_of_c1 = 0.01
+        psClass.value_of_c2 = 0.02
+        return_message = psClass.check_parameters_execute_pso(False)
+        self.assertTrue('Invalid'.lower() in return_message.lower())
+
+    def test_invalid_value_lower_c1(self):
+        psClass.num_of_iterations = 10
+        psClass.num_of_particles = 10
+        psClass.value_of_w = 0.3
+        psClass.value_of_c1 = -0.1
         psClass.value_of_c2 = 0.5
         return_message = psClass.check_parameters_execute_pso(False)
         self.assertTrue('Invalid'.lower() in return_message.lower())
 
-    def test_invalid_value_c2(self):
+    def test_invalid_value_lower_c2(self):
         psClass.num_of_iterations = 10
         psClass.num_of_particles = 10
         psClass.value_of_w = 0.3
         psClass.value_of_c1 = 0.3
-        psClass.value_of_c2 = 0
+        psClass.value_of_c2 = -0.1
+        return_message = psClass.check_parameters_execute_pso(False)
+        self.assertTrue('Invalid'.lower() in return_message.lower())
+
+    def test_invalid_value_upper_c1(self):
+        psClass.num_of_iterations = 10
+        psClass.num_of_particles = 10
+        psClass.value_of_w = 0.3
+        psClass.value_of_c1 = 4
+        psClass.value_of_c2 = 0.5
+        return_message = psClass.check_parameters_execute_pso(False)
+        self.assertTrue('Invalid'.lower() in return_message.lower())
+
+    def test_invalid_value_upper_c2(self):
+        psClass.num_of_iterations = 10
+        psClass.num_of_particles = 10
+        psClass.value_of_w = 0.3
+        psClass.value_of_c1 = 0.3
+        psClass.value_of_c2 = 4
         return_message = psClass.check_parameters_execute_pso(False)
         self.assertTrue('Invalid'.lower() in return_message.lower())
 
