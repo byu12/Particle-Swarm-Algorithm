@@ -63,7 +63,7 @@ def check_parameters_execute_pso(flag):
     return message
 
 
-def execute_pso(flag):
+def execute_pso():
     # create particle vector based on number of particles
     search_in_pso = PSO(num_of_particles)
     particles_vector = [Particle() for _ in range(search_in_pso.num_of_particles)]
@@ -93,8 +93,8 @@ def execute_pso(flag):
     output.append(search_in_pso.gbest_value)
 
     # control on unit tests
-    if flag:
-        read_to_csv(output)
+    #if flag:
+    read_to_csv(output)
 
     return output
 
@@ -189,8 +189,9 @@ if __name__ == "__main__":
     value_of_c2 = args.c2
 
     # flag is used for unit tests
-    execute = True
-    check_parameters_execute_pso(execute)
+    #execute = True
+    #check_parameters_execute_pso(execute)
+    check_parameters_execute_pso()
 
 
 

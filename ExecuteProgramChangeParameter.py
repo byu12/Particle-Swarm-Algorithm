@@ -96,9 +96,13 @@ if __name__ == "__main__":
     # add rounding error for all
     for x in range(5):
         change_num_iterations()
+    for x in range(5):
         change_num_particles()
+    for x in range(5):
         change_inertia_weight()
+    for x in range(5):
         change_c1()
+    for x in range(5):
         change_c2()
 
 
