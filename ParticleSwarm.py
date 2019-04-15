@@ -48,10 +48,10 @@ def check_parameters_execute_pso(flag):
             raise Exception("Social coefficient has to be in [0,3]")
 
         # the sum of cognitive and social coefficient is in [0.1,4.4]
-        c1_c2 = [value_of_c1, value_of_c2]
-        sum_of_c1_c2 = sum(c1_c2)
-        if sum_of_c1_c2 > 4.4 or sum_of_c1_c2 < 0.1:
-            raise Exception("The sum of cognitive and social coefficient has to be in [0.1,4.4]")
+        #c1_c2 = [value_of_c1, value_of_c2]
+        #sum_of_c1_c2 = sum(c1_c2)
+        #if sum_of_c1_c2 > 4.4 or sum_of_c1_c2 < 0.1:
+         #   raise Exception("The sum of cognitive and social coefficient has to be in [0.1,4.4]")
 
         if flag:
             execute_pso(True)
